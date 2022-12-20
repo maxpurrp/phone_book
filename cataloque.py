@@ -1,4 +1,14 @@
 number_books={}
+def add_file():
+    print("Введите путь для загрузки файла")
+    x=input()
+    f=open(x,"r")
+    for line in f:
+        line=line.strip()
+        x=line.split(":")
+        number_books[x[0]]=x[1]
+    f.close()
+    print("Контакты добавлены в справочник")
 def work():
     while True:
         command=input().split()
@@ -18,7 +28,7 @@ def work():
             if name in number_books.keys():
                 name=command[1]
                 number=command[2]
-                replace_user_in_number_books(number_books,name,number)
+                replace_user(number_books,name,number)
                 continue
         if command[0]=="show_book":
             show_book(number_books)
@@ -30,7 +40,9 @@ def work():
             continue
         if command[0]=="save":
             save()
-            print("Справочник сохранен")
+            continue
+        if command[0]=="add_file":
+            add_file()
             continue
         else:
             print("Команда не распознана,введите еще раз")
@@ -39,27 +51,27 @@ def save():
     print("<add> or <new>")
     choise=input()
     if choise=="add":
-        f=open("C:\\Users\\Максим\\Desktop\\Python\\hollyshit.txt","a")
+        print("Введите путь для сохранения файла")
+        x=input()
+        f=open(x,"a")
         for key,value in number_books.items():
             f.write(key + ":" + value + "\n")
         f.close()
     if choise=="new":
-        f=open("C:\\Users\\Максим\\Desktop\\Python\\hollyshit.txt","w")
+        print("Введите путь для сохранения файла")
+        y=input()
+        f=open(y,"w")
         for key,value in number_books.items():
             f.write(key + ":" + value + "\n")
         f.close()
-        print("Данные внесены в справочник")
-    else:
-        print("Команда не распознана")
+    print("Данные внесены в справочник")
 def close_prog():
     print("Хотите сохранить справочник?")
     print("yes or no")
     a=input()
     if a=="yes":
         save()
-        exit()
-    else:
-        exit()
+    exit()
 def add_user(number_books,name,number):
     if name in number_books.keys():
         print("Абонент уже назписан")
@@ -72,7 +84,7 @@ def delete_user(number_books,name):
         print(name, "удален из справочника")
     else:
         print("Абонент не записан в справочник")
-def replace_user_in_number_books(number_books,name,number):
+def replace_user(number_books,name,number):
     if name in number_books.keys():
         number_books[name]=number
         print("Номер изменен")
@@ -83,13 +95,13 @@ def show_book(number_books):
     for key,value in number_books.items():
             print(key,value)
 def help_in_number_books():
-    print("add < name > < nubmer > Позволяет добавить номер телефона в справочник")
-    print("delete < name > Позволяет удалить номер телефона")
-    print("replace < name > < number > Позволяет заменить номер абонента")
-    print(" showbook  Позволяет посмотореть содержимое справочника")
-    print(" exit  Выход из справочника")
-    print(" help  Печать списка с пояснениями")
-    print(" save   Сохранить текущую версию справочника")
+    print("add <name> <nubmer> Позволяет добавить номер телефона в справочник")
+    print("delete <name> Позволяет удалить номер телефона")
+    print("replace <name> <number> Позволяет заменить номер абонента")
+    print("showbook  Позволяет посмотореть содержимое справочника")
+    print("exit  Выход из справочника")
+    print("help  Печать списка с пояснениями")
+    print("save  Сохранить текущую версию справочника")
 if __name__=="__main__":
     help_in_number_books()
     work()
