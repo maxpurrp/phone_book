@@ -1,4 +1,4 @@
-number_books={}
+number_books=[]
 def work():
     while True:
         command=input().split()
