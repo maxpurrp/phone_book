@@ -1,12 +1,9 @@
 number_books={}
-def add_file():
-    print("Введите путь для загрузки файла")
-    x=input()
-    f=open(x,"r")
+def load_from_file(path):
+    f=open(path,"r")
     for line in f:
-        line=line.strip()
-        x=line.split(":")
-        number_books[x[0]]=x[1]
+        item=line.strip().split(":")
+        number_books[item[0]]=item[1]
     f.close()
     print("Контакты добавлены в справочник")
 def work():
@@ -39,28 +36,30 @@ def work():
             help_in_number_books()
             continue
         if command[0]=="save":
-            save()
+            print("Хотите добавить в существующий справочник или создать новый?")
+            print("<add> or <new>")
+            choise=input()
+            save(choise)
             continue
-        if command[0]=="add_file":
-            add_file()
+        if command[0]=="load_from_file":
+            print("Введите путь для загрузки файла")
+            path=input()
+            load_from_file(path)
             continue
         else:
             print("Команда не распознана,введите еще раз")
-def save():
-    print("Хотите добавить в существующий справочник или создать новый?")
-    print("<add> or <new>")
-    choise=input()
+def save(choise):
     if choise=="add":
         print("Введите путь для сохранения файла")
-        x=input()
-        f=open(x,"a")
+        path_1=input()
+        f=open(path_1,"a")
         for key,value in number_books.items():
             f.write(key + ":" + value + "\n")
         f.close()
     if choise=="new":
         print("Введите путь для сохранения файла")
-        y=input()
-        f=open(y,"w")
+        path_2=input()
+        f=open(path_2,"w")
         for key,value in number_books.items():
             f.write(key + ":" + value + "\n")
         f.close()
@@ -102,6 +101,7 @@ def help_in_number_books():
     print("exit  Выход из справочника")
     print("help  Печать списка с пояснениями")
     print("save  Сохранить текущую версию справочника")
+    print("load_from_file Загрузить файл с контактами")
 if __name__=="__main__":
     help_in_number_books()
     work()
