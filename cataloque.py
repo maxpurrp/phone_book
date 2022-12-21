@@ -37,7 +37,7 @@ def work():
             continue
         if command[0]=="save":
             print("Хотите добавить в существующий справочник или создать новый?")
-            print("<add> or <new>")
+            print("add or new")
             choise=input()
             print("Введите путь для сохранения файла")
             path=input()
