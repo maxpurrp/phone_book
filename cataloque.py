@@ -39,7 +39,9 @@ def work():
             print("Хотите добавить в существующий справочник или создать новый?")
             print("<add> or <new>")
             choise=input()
-            save(choise)
+            print("Введите путь для сохранения файла")
+            path=input()
+            save(choise,path)
             continue
         if command[0]=="load_from_file":
             print("Введите путь для загрузки файла")
@@ -48,18 +50,14 @@ def work():
             continue
         else:
             print("Команда не распознана,введите еще раз")
-def save(choise):
+def save(choise,path):
     if choise=="add":
-        print("Введите путь для сохранения файла")
-        path_1=input()
-        f=open(path_1,"a")
+        f=open(path,"a")
         for key,value in number_books.items():
             f.write(key + ":" + value + "\n")
         f.close()
     if choise=="new":
-        print("Введите путь для сохранения файла")
-        path_2=input()
-        f=open(path_2,"w")
+        f=open(path,"w")
         for key,value in number_books.items():
             f.write(key + ":" + value + "\n")
         f.close()
@@ -67,8 +65,8 @@ def save(choise):
 def close_prog():
     print("Хотите сохранить справочник?")
     print("yes or no")
-    a=input()
-    if a=="yes":
+    choise=input()
+    if choise=="yes":
         save()
     exit()
 def add_user(number_books,name,number):
