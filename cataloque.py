@@ -1,5 +1,5 @@
 number_books={}
-def load_from_file(path):
+def load(path):
     f=open(path,"r")
     for line in f:
         item=line.strip().split(":")
@@ -36,18 +36,26 @@ def work():
             help_in_number_books()
             continue
         if command[0]=="save":
-            print("Хотите добавить в существующий справочник или создать новый?")
-            print("add or new")
-            choise=input()
-            print("Введите путь для сохранения файла")
-            path=input()
-            save(choise,path)
-            continue
-        if command[0]=="load_from_file":
-            print("Введите путь для загрузки файла")
-            path=input()
-            load_from_file(path)
-            continue
+            if len(command)==2:
+                path=command[1]
+                choise="add"
+                save(choise,path)
+                continue
+            if len(command)==3:
+                path=command[1]
+                choise=command[2]
+                save(choise,path)
+                continue
+        if command[0]=="load":
+            if len(command)==1:
+                print("Введите путь для загрузки файла")
+                path=input()
+                load(path)
+                continue
+            if len(command)==2:
+                path=command[1]
+                load(path)
+                continue
         else:
             print("Команда не распознана,введите еще раз")
 def save(choise,path):
@@ -103,8 +111,8 @@ def help_in_number_books():
     print("showbook  Позволяет посмотореть содержимое справочника")
     print("exit  Выход из справочника c возможностью его сохранения")
     print("help  Печать списка с пояснениями")
-    print("save  Сохранить текущую версию справочника")
-    print("load_from_file Загрузить файл с контактами")
+    print("save <file> [add|new]  Сохранить текущую версию справочника")
+    print("load <file> Загрузить файл с контактами")
 if __name__=="__main__":
     help_in_number_books()
     work()
