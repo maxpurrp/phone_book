@@ -46,16 +46,15 @@ def work():
                 choise=command[2]
                 save(choise,path)
                 continue
+            else:
+                print("Неккоретный ввод")
         if command[0]=="load":
-            if len(command)==1:
-                print("Введите путь для загрузки файла")
-                path=input()
-                load(path)
-                continue
             if len(command)==2:
                 path=command[1]
                 load(path)
                 continue
+            else:
+                print("Неккоректный ввод")
         else:
             print("Команда не распознана,введите еще раз")
 def save(choise,path):
@@ -84,7 +83,7 @@ def close_prog():
     exit()
 def add_user(number_books,name,number):
     if name in number_books.keys():
-        print("Абонент уже назписан")
+        print("Абонент уже записан")
     else:
         number_books[name]=number
         print(name, "добавлен в справочник")
