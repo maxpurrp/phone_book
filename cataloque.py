@@ -19,13 +19,14 @@ def work():
             delete_user(number_books,name)
             continue
         if command[0]=="replace":
-            if len(command)!=3:
-                print("Повторите корректный ввод")
-                continue
-            if name in number_books.keys():
+            if len(command) == 3:
                 name=command[1]
                 number=command[2]
-                replace_user(number_books,name,number)
+                if name in number_books.keys():
+                    replace_user(number_books,name,number)
+                    continue
+            else:
+                print("Повторите корректный ввод")
                 continue
         if command[0]=="show_book":
             show_book(number_books)
